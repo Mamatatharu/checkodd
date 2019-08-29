@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="margin-top: 30px;margin-left:15px;">
+    <input id="text1" type="text" name="">
+    <button style="margin-left: 15px" onclick="addfunction()">Add</button>
+    </div>
+    <ul id="unorderlist">
+
+    </ul>
+    
+    <script>
+        var listid=1;
+        var inputpreviousvalue='';
+        function deletefun(listid)
+        {
+          var litagselect= document.getElementById(`li-${listid}`);
+
+          litagselect.parentNode.removeChild(litagselect);
+        }
+    function addfunction()
+    {
+        var liname=document.getElementById("text1").value;
+        var licreate=document.createElement("li");
+        licreate.setAttribute("id",`li-${listid}`);
+        var text=document.createTextNode("liname");
+        var input=document.createElement("input");
+        var button1=document.createElement("button");
+        var button2=document.createElement("button");
+        var button3=document.createElement("button");
+        var button4=document.createElement("button");
+
+         button1.innerHTML="Modify";
+         button2.innerHTML="Delete";       
+         button3.innerHTML="OK";       
+         button4.innerHTML="Cancel"; 
+
+         input.setAttribute("id",`inputtext-${listid}`); 
+         input.setAttribute("value", liname); 
+         input.readOnly=true;    
+         
+         button1.setAttribute("id",`modifybtn-${listid}`);
+         button1.setAttribute("onclick",`modifyfun(${listid})`);
+         button1.setAttribute("style","background-color:lightgreen;color:red;margin-left:15px;margin-right:15px;");
+         
+         button2.setAttribute("id",`deletebtn-${listid}`);
+         button2.setAttribute("onclick",`deletefun(${listid})`);
+         button2.setAttribute("style","background-color:lightgreen;color:red;margin-left:15px;margin-right:15px;");
+           
+         
+         button3.setAttribute("id",`okbtn-${listid}`);
+         button3.setAttribute("onclick",`okfun(${listid})`);
+         button3.setAttribute("style","background-color:blue;color:yellow;margin-left:15px;margin-right:15px;");
+         
+         button4.setAttribute("id",`cancelbtn-${listid}`);
+         button4.setAttribute("onclick",`cancelfun(${listid})`);
+         button4.setAttribute("style","background-color:blue;color:yellow;margin-left:15px;margin-right:15px;");
+
+         button3.style.display="none";
+         button4.style.display="none";
+         
+         licreate.appendChild(input);
+         licreate.appendChild(button1);
+         licreate.appendChild(button2);
+         licreate.appendChild(button3);
+         licreate.appendChild(button4);
+        
+        document.getElementById("unorderlist").appendChild(licreate);
+        listid++;
+    }
+       function modifyfun(listid)
+       {
+         document.getElementById(`modifybtn-${listid}`).style.display="none";
+         document.getElementById(`deletebtn-${listid}`).style.display="none";
+         document.getElementById(`okbtn-${listid}`).style.display="inline";
+         document.getElementById(`cancelbtn-${listid}`).style.display="inline";
+         document.getElementById(`inputtext-${listid}`).readOnly=false;
+         inputpreviousvalue=document.getElementById(`inputtext-${listid}`).value;
+
+
+       }
+       function okfun(listid)
+       {
+         document.getElementById(`modifybtn-${listid}`).style.display="inline";
+         document.getElementById(`deletebtn-${listid}`).style.display="inline";
+         document.getElementById(`okbtn-${listid}`).style.display="none";
+         document.getElementById(`cancelbtn-${listid}`).style.display="none";
+         document.getElementById(`inputtext-${listid}`).readOnly=true;
+         document.getElementById(`inputtext-${listid}`).value=document.getElementById(`inputtext-${listid}`).value
+
+       }
+       function cancelfun(listid)
+       {
+         document.getElementById(`modifybtn-${listid}`).style.display="inline";
+         document.getElementById(`deletebtn-${listid}`).style.display="inline";
+         document.getElementById(`okbtn-${listid}`).style.display="none";
+         document.getElementById(`cancelbtn-${listid}`).style.display="none";
+         document.getElementById(`inputtext-${listid}`).readOnly=true;
+         document.getElementById(`inputtext-${listid}`).value=inputpreviousvalue;
+
+       }
+    
+    </script>
+</body>
+</html>

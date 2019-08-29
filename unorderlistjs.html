@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+</head>
+<body>
+    <input id="text1" type="text" name="">
+    <button onclick="addtext()">Add</button>
+   <ul  id="unorder">
+    </ul>
+    <script>
+        var listid=1;
+        var previousinputvalue='';
+    function addtext()
+    {
+     var liname=document.getElementById("text1").value;
+     var createli=document.createElement("li");
+     var createinput=document.createElement("input");
+     var createbutton1=document.createElement("button");
+     var createbutton2=document.createElement("button");
+     var createbutton3=document.createElement("button");
+     var createbutton4=document.createElement("button");
+     var text=document.createTextNode(liname);
+
+     createbutton1.innerHTML="Modify";
+     createbutton2.innerHTML="Delete";
+     createbutton3.innerHTML= "OK";
+     createbutton4.innerHTML="Cancel";
+
+     createbutton1.style.marginLeft="30px";
+     createbutton1.style.marginRight="30px";
+
+     createinput.setAttribute("value",liname);
+     createinput.setAttribute("id",`inputtext-${listid}`);
+     
+     createbutton1.setAttribute("onclick",`modify(${listid})`);   
+     createbutton4.setAttribute("onclick",`cancelfunction(${listid})`);
+     createbutton3.setAttribute("onclick",`okfunction(${listid})`);
+     
+     createbutton2.setAttribute("id",`deletebutton-${listid}`);
+     createbutton1.setAttribute("id",`modifybutton-${listid}`);  
+     createbutton3.setAttribute("id",`okbutton-${listid}`);
+     createbutton4.setAttribute("id",`cancelbutton-${listid}`);
+
+     createbutton3.setAttribute("style","background-color:red; color:blue;margin-left:10px;");
+     createbutton4.setAttribute("style","background-color:red; color:blue; margin-left:30px;");
+     createbutton1.setAttribute("class","btn btn-primary");
+
+     createbutton3.style.display="none";
+     createbutton4.style.display="none"
+
+     createli.appendChild(createinput);
+     createli.appendChild(createbutton1);
+     createli.appendChild(createbutton2);
+     createli.appendChild(createbutton3);
+     createli.appendChild(createbutton4);
+     createinput.readOnly=true;   
+
+     document.getElementById("unorder").appendChild(createli);
+     listid++;
+    }
+    function modify(listid)
+    {
+document.getElementById(`okbutton-${listid}`).style.display="inline";
+document.getElementById(`cancelbutton-${listid}`).style.display="inline";
+document.getElementById(`modifybutton-${listid}`).style.display="none";
+document.getElementById(`deletebutton-${listid}`).style.display="none";
+document.getElementById(`inputtext-${listid}`).readOnly=false;
+previousinputvalue=document.getElementById(`inputtext-${listid}`).value;
+    }
+    function cancelfunction(listid)
+    {
+      
+document.getElementById(`modifybutton-${listid}`).style.display="inline";
+document.getElementById(`deletebutton-${listid}`).style.display="inline";  
+document.getElementById(`okbutton-${listid}`).style.display="none";
+document.getElementById(`cancelbutton-${listid}`).style.display="none";
+document.getElementById(`inputtext-${listid}`).readOnly=true;
+document.getElementById(`inputtext-${listid}`).value=previousinputvalue;
+    }
+    function okfunction(listid)
+    {
+document.getElementById(`inputtext-${listid}`).value=document.getElementById(`inputtext-${listid}`).value
+document.getElementById(`modifybutton-${listid}`).style.display="inline";
+document.getElementById(`deletebutton-${listid}`).style.display="inline";   
+document.getElementById(`okbutton-${listid}`).style.display="none";
+document.getElementById(`cancelbutton-${listid}`).style.display="none"; 
+document.getElementById(`inputtext-${listid}`).readOnly=true;
+    }
+    </script>
+</body>
+</html>

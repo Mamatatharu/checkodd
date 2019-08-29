@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="register" class="card w-25 display-none">
+        <div class="card-header">
+            <h3 class="text-center">Register</h3>
+        </div>
+        <div class="card-body">
+            <p id="paragh"></p>
+            <label>Firstname</label>
+            <input id="first" type="text" name=""><br>
+            <label>Lastname</label>
+            <input id="last" type="text" name=""><br>
+            <label>Email Id</label>
+            <input id="email" type="text" name=""><br>
+            <label>Password</label>
+            <input id="pass" type="password" name="">
+        </div>
+        <div class="card-footer">
+            <button onclick="table()">Save</button>
+        </div>
+    </div>
+    <table id="data" class="h-3 float-right" style="margin-top: -290px;border :2px solid gray;width:800px; margin-right: 80px;">
+        <tr id="row">
+             <th>Userid</th>
+             <th>Firstname</th>
+             <th>Lastname</th>
+             <th>Email Id</th>
+            <th>Password</th>
+         </tr>    
+</table>
+    <script>
+    function table()
+    // {
+    //     var fullname=document.getElementById("f").value;
+    //     var lastname=document.getElementById("last").value;
+    //     var email_id=document.getElementById("email").value;
+    //     var password=document.getElementById("pass").value;
+
+
+     var tdfname=document.getElementById("first").value;
+     var tdlname=document.getElementById("last").value;
+     var tdemail=document.getElementById("email").value;
+     var tdpass=document.getElementById("pass").value;
+     if(tdfname!=='' && tdlname!=='' && tdemail!=='' && tdpass!=='')
+     {
+       document.getElementById("td").style.visibility="visible";
+     }
+     else
+     {
+        document.getElementById("paragh").innerHTML=" Enter all the fields";
+     }
+     var trcreate=document.createElement("tr");
+     
+     var tdcreate1=document.createElement("td")
+     var tdcreate2=document.createElement("td")
+     var tdcreate3=document.createElement("td")
+     var tdcreate4=document.createElement("td")
+
+     var input1=document.createElement("input");
+     var input2=document.createElement("input");
+     var input3=document.createElement("input");
+     var input4=document.createElement("input");
+
+     var text=document.createTextNode("text");
+     input1.value="Firstname";
+     input2.value="Lastname";
+     input3.value="Email Id";
+     input4.value="Password";
+
+     trcreate.appendChild(tdcreate1);
+     trcreate.appendChild(tdcreate2);
+     trcreate.appendChild(tdcreate2);
+     trcreate.appendChild(tdcreate2);
+
+     document.getElementById("data").appendChild(trcreate);    
+    }
+    </script>
+</body>
+</html>
