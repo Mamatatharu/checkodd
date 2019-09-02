@@ -8,18 +8,18 @@
 </head>
 <body>
     <button onclick="on()">turn on light</button>
-    <img id="image" src="/web/bulb.png" style="width: 100px ;background-color:yellow;">
-
-    <button onclick="off">turn off light</button>
+    <img id="image" src="/web/bulboff.png" style="width: 100px;">
+    
+    <button onclick="off()">turn off light</button>
    
      <script>
          function on()
          {
-          document.getElementById("image").src="/web/bulb.png";
+          document.getElementById("image").src="/web/bulbon.png";
          }
          function off()
          {
-          document.getElementById("image").src="/web/bulb.png";
+          document.getElementById("image").src="/web/bulboff.png";
 
          }
      </script>

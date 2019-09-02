@@ -9,80 +9,226 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div id="register" class="card w-25 display-none">
-        <div class="card-header">
-            <h3 class="text-center">Register</h3>
+    <div class="row">
+        <div class="col-md-4">
+                <div id="register" class="card w-75 ">
+                        <div class="card-header">
+                            <h3 class="text-center">Register</h3>
+                        </div>
+                        <div class="card-body">
+                            <p id="paragh" style="color:red"></p>
+                            <label>Firstname</label>
+                            <input id="first" type="text" name=""><br>
+                            <label>Lastname</label>
+                            <input id="last" type="text" name=""><br>
+                            <label>Email Id</label>
+                            <input id="email" type="text" name=""><br>
+                            <label>Password</label>
+                            <input id="pass" type="password" name="">
+                        </div>
+                        <div class="card-footer">
+                            <button onclick="table()">Save</button>
+                        </div>
+                    </div>
+                
         </div>
-        <div class="card-body">
-            <p id="paragh"></p>
-            <label>Firstname</label>
-            <input id="first" type="text" name=""><br>
-            <label>Lastname</label>
-            <input id="last" type="text" name=""><br>
-            <label>Email Id</label>
-            <input id="email" type="text" name=""><br>
-            <label>Password</label>
-            <input id="pass" type="password" name="">
+        <div class="col-md-8">
+            <div class="row m-0 p-0">
+                <table id="data" class="table col-md-12 p-0 ml-n2 table-bordered">
+                        <tr class="row p-0 m-0">
+                             <th class="col-md-1">Userid</th>
+                             <th class="col-md-3">Firstname</th>
+                             <th class="col-md-3">Lastname</th>
+                             <th class="col-md-3">Email Id</th>
+                            <th class="col-md-2">Password</th>
+                         </tr>    
+                </table>
+            </div>
         </div>
-        <div class="card-footer">
-            <button onclick="table()">Save</button>
-        </div>
-    </div>
-    <table id="data" class="h-3 float-right" style="margin-top: -290px;border :2px solid gray;width:800px; margin-right: 80px;">
-        <tr id="row">
-             <th>Userid</th>
-             <th>Firstname</th>
-             <th>Lastname</th>
-             <th>Email Id</th>
-            <th>Password</th>
-         </tr>    
-</table>
+    
+     </div>
     <script>
+        var rowid=1;
+        var inputpreviousvalue1='';
+        var inputpreviousvalue2='';
+        var inputpreviousvalue3='';
+        var inputpreviousvalue4='';
+
+        function deletefun(rowid)
+        {
+        var tdselect=document.getElementById(`tr-${rowid}`);
+        tdselect.parentNode.removeChild(tdselect);
+        }
     function table()
-    // {
-    //     var fullname=document.getElementById("f").value;
-    //     var lastname=document.getElementById("last").value;
-    //     var email_id=document.getElementById("email").value;
-    //     var password=document.getElementById("pass").value;
-
-
+    {
      var tdfname=document.getElementById("first").value;
      var tdlname=document.getElementById("last").value;
      var tdemail=document.getElementById("email").value;
      var tdpass=document.getElementById("pass").value;
      if(tdfname!=='' && tdlname!=='' && tdemail!=='' && tdpass!=='')
      {
-       document.getElementById("td").style.visibility="visible";
-     }
-     else
-     {
-        document.getElementById("paragh").innerHTML=" Enter all the fields";
-     }
-     var trcreate=document.createElement("tr");
-     
-     var tdcreate1=document.createElement("td")
-     var tdcreate2=document.createElement("td")
-     var tdcreate3=document.createElement("td")
-     var tdcreate4=document.createElement("td")
+       document.getElementById("data").style.visibility="visible";
+       var button1=document.createElement("button");
+       var button2=document.createElement("button");
+       var button3=document.createElement("button");
+       var button4=document.createElement("button");
+       var trcreate=document.createElement("tr");
+       trcreate.setAttribute("id",`tr-${rowid}`);
 
+     var tdcreate0=document.createElement("td");
+     var tdcreate1=document.createElement("td");
+     var tdcreate2=document.createElement("td");
+     var tdcreate3=document.createElement("td");
+     var tdcreate4=document.createElement("td");
+     
+    var input0 = document.createElement("input");
      var input1=document.createElement("input");
      var input2=document.createElement("input");
      var input3=document.createElement("input");
      var input4=document.createElement("input");
 
      var text=document.createTextNode("text");
-     input1.value="Firstname";
-     input2.value="Lastname";
-     input3.value="Email Id";
-     input4.value="Password";
 
+     button1.innerHTML="Modify";
+     button2.innerHTML="Delete";
+     button3.innerHTML="OK";
+     button4.innerHTML="Cancel";
+
+     
+
+     input1.setAttribute("id",`inputtext1-${rowid}`); 
+         input1.setAttribute("value",tdfname ); 
+         input1.readOnly=true;    
+
+         input2.setAttribute("id",`inputtext2-${rowid}`); 
+         input2.setAttribute("value",tdlname ); 
+         input2.readOnly=true;   
+         
+     input3.setAttribute("id",`inputtext3-${rowid}`); 
+         input3.setAttribute("value",tdemail); 
+         input3.readOnly=true;  
+         
+     input4.setAttribute("id",`inputtext4-${rowid}`); 
+         input4.setAttribute("value",tdpass ); 
+         input4.readOnly=true;    
+         
+         button1.setAttribute("id",`modifybtn-${rowid}`);
+         button1.setAttribute("onclick",`modifyfun(${rowid})`);
+         
+         button2.setAttribute("id",`deletebtn-${rowid}`);
+         button2.setAttribute("onclick",`deletefun(${rowid})`);
+           
+         
+         button3.setAttribute("id",`okbtn-${rowid}`);
+         button3.setAttribute("onclick",`okfun(${rowid})`);
+         
+         button4.setAttribute("id",`cancelbtn-${rowid}`);
+         button4.setAttribute("onclick",`cancelfun(${rowid})`);
+    
+         button3.style.display="none";
+         button4.style.display="none";
+
+     input0.value = rowid;
+     input1.value=document.getElementById("first").value;
+     input2.value=document.getElementById("last").value;
+     input3.value=document.getElementById("email").value;
+     input4.value=document.getElementById("pass").value;
+
+     trcreate.setAttribute("class","row m-0 p-0");
+     tdcreate0.setAttribute("class","col-md-1 p-0 m-0");
+     tdcreate1.setAttribute("class","col-md-3 p-0 m-0");
+     tdcreate2.setAttribute("class","col-md-3 p-0 m-0");
+     tdcreate3.setAttribute("class","col-md-3 p-0 m-0");
+     tdcreate4.setAttribute("class","col-md-2 p-0 m-0");
+
+     input0.setAttribute("class","w-100");
+     input1.setAttribute("class","w-100");
+     input2.setAttribute("class","w-100");
+     input3.setAttribute("class","w-100");
+     input4.setAttribute("class","w-100");
+
+
+     tdcreate0.appendChild(input0);
+     tdcreate1.appendChild(input1);
+     tdcreate2.appendChild(input2);
+     tdcreate3.appendChild(input3);
+     tdcreate4.appendChild(input4);
+
+
+     trcreate.appendChild(tdcreate0);
      trcreate.appendChild(tdcreate1);
      trcreate.appendChild(tdcreate2);
-     trcreate.appendChild(tdcreate2);
-     trcreate.appendChild(tdcreate2);
+     trcreate.appendChild(tdcreate3);
+     trcreate.appendChild(tdcreate4);
+
+     trcreate.appendChild(button1);
+     trcreate.appendChild(button2);
+     trcreate.appendChild(button3);
+     trcreate.appendChild(button4);
+
 
      document.getElementById("data").appendChild(trcreate);    
+     rowid++;
+     }
+     
+     else
+     {
+        document.getElementById("paragh").innerHTML=" Enter all the fields";
+     }
+     
     }
+    
+    function modifyfun(rowid)
+       {
+         document.getElementById(`modifybtn-${rowid}`).style.display="none";
+         document.getElementById(`deletebtn-${rowid}`).style.display="none";
+         document.getElementById(`okbtn-${rowid}`).style.display="inline";
+         document.getElementById(`cancelbtn-${rowid}`).style.display="inline";
+         document.getElementById(`inputtext1-${rowid}`).readOnly=false;
+         document.getElementById(`inputtext2-${rowid}`).readOnly=false;
+         document.getElementById(`inputtext3-${rowid}`).readOnly=false;
+         document.getElementById(`inputtext4-${rowid}`).readOnly=false;
+         inputpreviousvalue1=document.getElementById(`inputtext1-${rowid}`).value;
+         inputpreviousvalue2=document.getElementById(`inputtext2-${rowid}`).value;
+         inputpreviousvalue3=document.getElementById(`inputtext3-${rowid}`).value;
+         inputpreviousvalue4=document.getElementById(`inputtext4-${rowid}`).value;
+
+
+       }
+       function okfun(rowid)
+       {
+         document.getElementById(`modifybtn-${rowid}`).style.display="inline";
+         document.getElementById(`deletebtn-${rowid}`).style.display="inline";
+         document.getElementById(`okbtn-${rowid}`).style.display="none";
+         document.getElementById(`cancelbtn-${rowid}`).style.display="none";
+         document.getElementById(`inputtext1-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext2-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext3-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext4-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext1-${rowid}`).value=document.getElementById(`inputtext-${listid}`).value;
+         document.getElementById(`inputtext2-${rowid}`).value=document.getElementById(`inputtext-${listid}`).value;
+         document.getElementById(`inputtext3-${rowid}`).value=document.getElementById(`inputtext-${listid}`).value;
+         document.getElementById(`inputtext4-${rowid}`).value=document.getElementById(`inputtext-${listid}`).value;
+
+       }
+       function cancelfun(rowid)
+       {
+         document.getElementById(`modifybtn-${rowid}`).style.display="inline";
+         document.getElementById(`deletebtn-${rowid}`).style.display="inline";
+         document.getElementById(`okbtn-${rowid}`).style.display="none";
+         document.getElementById(`cancelbtn-${rowid}`).style.display="none";
+         document.getElementById(`inputtext1-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext2-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext3-${rowid}`).readOnly=true;
+         document.getElementById(`inputtext4-${rowid}`).readOnly=true;
+
+         document.getElementById(`inputtext1-${rowid}`).value=inputpreviousvalue1;
+         document.getElementById(`inputtext2-${rowid}`).value=inputpreviousvalue2;
+         document.getElementById(`inputtext3-${rowid}`).value=inputpreviousvalue3;
+         document.getElementById(`inputtext4-${rowid}`).value=inputpreviousvalue4;
+
+
+       }
     </script>
 </body>
 </html>
